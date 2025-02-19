@@ -1,0 +1,3 @@
+PLAYER | SCORE
+
+BadJoke: 0
