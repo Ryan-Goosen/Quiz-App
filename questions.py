@@ -1,5 +1,6 @@
 from html import unescape
 import requests
+from random import shuffle
 
 API_LINK = r"https://opentdb.com/api.php?"
 
@@ -14,4 +15,6 @@ class Question:
     def __init__(self, question, answer, options):
         self.question = question
         self.answer = answer
+        shuffle(options)
+        shuffle(options)
         self.options = options

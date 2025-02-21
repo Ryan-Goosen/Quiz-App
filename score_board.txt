@@ -1,3 +1,10 @@
-PLAYER | SCORE
-
-BadJoke: 0
+PLAYER    | SCORE
+   asd       : 0         
+francis   : 1         
+fsa       : 5         
+tst       : 5         
+james     : 0         
+jessica   : 0         
+bb        : 0         
+qwe       : 0         
+& c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/.env/Scripts/python.exe c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/main.py: 0         
