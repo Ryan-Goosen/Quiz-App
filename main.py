@@ -9,7 +9,7 @@ import os
 
 SCORE = 0
 
-def store_questions() -> dict:
+def get_questions() -> dict:
     with open('multiple.txt', 'r') as file:
         data = file.readlines()
 
@@ -22,15 +22,7 @@ def store_questions() -> dict:
     
     return formatted_question
 
-def get_questions(question:object, mode='cli') -> str:
-    # q_n_a = {key+1:val for key, val in enumerate(question.options)}
-    # if mode is 'cli':
-    #     options = ""
-    #     for key,val in q_n_a.items():
-    #         options += f"{key} : {val}\n"
-    #     return options
-    # return q_n_a
-
+def display_questions(question:object, mode='cli') -> str:
     q_n_a = {key + 1: val for key, val in enumerate(question.options)}
     if mode is 'cli':
         options = ""
@@ -55,14 +47,20 @@ def CLI_version(questions) -> None:
     print(cli_header)
 
     for key,question in questions.items():
-        options = get_questions(question)
-        print(f"\n{key}. QUESTION:\n", question.question, "\n\nOptions:")
+        options = display_questions(question)
+        print(f"\nCurrent Score: {SCORE}/{len(questions)}\n{key}. QUESTION:\n", question.question, "\n\nOptions:")
         print(options)
-
-        user_answer = int(input(f"\nNum 1-{len(question.options)}: "))
+        while True:
+            user_answer = input(f"\nPick an option from 1-{len(question.options)}: ")
+            try:
+                user_answer = int(user_answer)
+                if 1 <= user_answer <= len(question.options):
+                    break
+                print('Pick a valid option')
+            except:
+                print("Please enter a valid option.")
         if question.options[user_answer-1] == question.answer:
             SCORE += 1
-            print(f"That was correct!\nCurrent Score {SCORE}/{key}")
         else:
             print(f"That was incorrect!\nCurrent Score {SCORE}/{key}")
         # sleep(1)
@@ -74,7 +72,7 @@ def CLI_version(questions) -> None:
 def game():
     global SCORE
 
-    questions = store_questions()
+    questions = get_questions()
     CLI_version(questions)
 
     
@@ -82,14 +80,17 @@ def game():
     update_score(tag, SCORE)
 
 def main():
-    option = input("Please select what you want to do:\n1. Play a Game    |   2. View Leaderboard\n")
+    print("Please select what you want to do:\n1. Play a Game    |   2. View Leaderboard\n3. Settings\n")
+    option = input(": ")
     os.system('cls')
     
     if int(option) == 1:
         game()
-    else:
+    elif int(option) == 2:
         read_scores()
-
+    elif int(option) == 3:
+        defaults = settings()
+        
         
 if __name__ == "__main__":
     main()
