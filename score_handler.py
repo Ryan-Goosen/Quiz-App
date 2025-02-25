@@ -49,7 +49,7 @@ def settings():
         if key == "amount":
             print("The amount of questions you would like to answer.\nPick a number between 10 and 50.")
             while True:
-                user_input = input(": ")
+                user_input = str(input(": "))
                 if user_input.strip() == "":
                         break
                 try:
@@ -68,7 +68,7 @@ def settings():
                 print(f"{f'{pos+1}':<10}: {f'{val['name']}':<10}\n")
 
             while True:
-                user_input = input(": ")
+                user_input = str(input(": "))
                 if user_input.strip() == "":
                         break
                 try:
@@ -84,9 +84,37 @@ def settings():
         elif key == "difficulty":   
             while True:
                 print("Options are:\n1. Easy    | 2. Medium     | 3. Hard")
-                user_input   
+                user_input = str(input(": "))
+                if user_input.strip() == "":
+                        break
+                try:
+                    choice = int(user_input)
+                    if 1 <= choice <= 3:
+                        break
+                    else:
+                        print(f"Pick a number between 1 & 3.")
+                except:
+                    print("Please enter a number")
 
-        defaults[key] = value if user_input == "" or not user_input.isnumeric() else user_input
+            user_input = 'easy' if choice == 1 else 'medium' if choice == 2 else "hard"
+        else:
+            while True:
+                print("Options are:\n1. True/False    | 2. Multiple Choice")
+                user_input = str(input(": "))
+                if user_input.strip() == "":
+                        break
+                try:
+                    choice = int(user_input)
+                    if 1 <= choice <= 2:
+                        break
+                    else:
+                        print(f"Pick a number between 1 & 2.")
+                except:
+                    print("Please enter a number")
+
+            user_input = 'boolean' if choice == 1 else 'multiple'
+
+        defaults[key] = value if str(user_input) == "" or not str(user_input).isnumeric() else user_input
         write_to_file(defaults)
 
 def check_file_exists(path):
@@ -107,7 +135,7 @@ def check_file_exists(path):
 
 
 def write_to_file(stuff):
-    with open(SETTINGS_PATH, "a") as file:
+    with open(SETTINGS_PATH, "w") as file:
             for key, value in stuff.items():
                 file.write(f"{key} : {value}\n")   
 

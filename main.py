@@ -10,15 +10,18 @@ import os
 SCORE = 0
 
 def get_questions() -> dict:
-    with open('multiple.txt', 'r') as file:
-        data = file.readlines()
-
-    # data = GetQuestions().question_data
+    parameters = get_settings()
+    data = GetQuestions(parameters).question_data
 
     formatted_question = {
-        pos+1 : Question(question=ast.literal_eval(item)['question'] , answer=ast.literal_eval(item)['correct_answer'] , options=ast.literal_eval(item)['incorrect_answers'] + [ast.literal_eval(item)['correct_answer']])
-        for pos,item in enumerate(data)
-    }
+    pos + 1: Question(
+        question=item["question"],
+        answer=item["correct_answer"],
+        options=item["incorrect_answers"] + [item["correct_answer"]]
+    )
+    for pos, item in enumerate(data)
+}
+
     
     return formatted_question
 
@@ -80,17 +83,18 @@ def game():
     update_score(tag, SCORE)
 
 def main():
+    # while True:
+    os.system('cls')
     print("Please select what you want to do:\n1. Play a Game    |   2. View Leaderboard\n3. Settings\n")
     option = input(": ")
     os.system('cls')
-    
     if int(option) == 1:
         game()
     elif int(option) == 2:
         read_scores()
     elif int(option) == 3:
         defaults = settings()
-        
+  
         
 if __name__ == "__main__":
     main()
