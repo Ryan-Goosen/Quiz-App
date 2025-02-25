@@ -1,4 +1,4 @@
 Player    : Score     
-pietie    : 6         
-& c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/.env/Scripts/python.exe c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/main.py: 0         
-lesego    : 5         
+
+frank     : 6         
+1 man     : 1         /10

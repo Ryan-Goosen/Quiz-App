@@ -1,6 +1,6 @@
 from questions import GetQuestions, Question
 from random import randint, shuffle
-from ui import cli_header, cli_game_over
+from ui import *
 from time import sleep
 from score_handler import *
 
@@ -14,15 +14,14 @@ def get_questions() -> dict:
     data = GetQuestions(parameters).question_data
 
     formatted_question = {
-    pos + 1: Question(
-        question=item["question"],
-        answer=item["correct_answer"],
-        options=item["incorrect_answers"] + [item["correct_answer"]]
-    )
-    for pos, item in enumerate(data)
-}
+        pos + 1: Question(
+            question=item["question"],
+            answer=item["correct_answer"],
+            options=item["incorrect_answers"] + [item["correct_answer"]]
+        )
+        for pos, item in enumerate(data)
+        }
 
-    
     return formatted_question
 
 def display_questions(question:object, mode='cli') -> str:
@@ -47,11 +46,12 @@ def display_questions(question:object, mode='cli') -> str:
 
 def CLI_version(questions) -> None:
     global SCORE
-    print(cli_header)
-
+    os.system('cls')
+    print(quiz_start)
+    count = 0
     for key,question in questions.items():
         options = display_questions(question)
-        print(f"\nCurrent Score: {SCORE}/{len(questions)}\n{key}. QUESTION:\n", question.question, "\n\nOptions:")
+        print(f"\nCurrent Score: {SCORE}/{count}\n{key}. QUESTION:\n", question.question, "\n\nOptions:")
         print(options)
         while True:
             user_answer = input(f"\nPick an option from 1-{len(question.options)}: ")
@@ -62,14 +62,20 @@ def CLI_version(questions) -> None:
                 print('Pick a valid option')
             except:
                 print("Please enter a valid option.")
+
+            
         if question.options[user_answer-1] == question.answer:
             SCORE += 1
+            print(correct)
         else:
-            print(f"That was incorrect!\nCurrent Score {SCORE}/{key}")
+            print(incorrect)
+
         # sleep(1)
+        count += 1
         os.system('cls')
 
     print(cli_game_over)
+    print(f"FINAL SCORE WAS {SCORE}/{len(questions)}")
 
     
 def game():
@@ -80,21 +86,26 @@ def game():
 
     
     tag = input("Please enter your gamer tag:\n")
-    update_score(tag, SCORE)
+    update_score(tag, SCORE, len(questions))
 
 def main():
-    # while True:
+    while True:
+        os.system('cls')
+        print(cli_header)
+        print("Please select what you want to do:\n1. Play a Game    |   2. View Leaderboard\n3. Settings\n")
+        option = input(": ")
+        try:
+            if int(option) == 1:
+                game()
+            elif int(option) == 2:
+                read_scores()
+            elif int(option) == 3:
+                defaults = settings()
+        except:
+            break
+    
     os.system('cls')
-    print("Please select what you want to do:\n1. Play a Game    |   2. View Leaderboard\n3. Settings\n")
-    option = input(": ")
-    os.system('cls')
-    if int(option) == 1:
-        game()
-    elif int(option) == 2:
-        read_scores()
-    elif int(option) == 3:
-        defaults = settings()
-  
+
         
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ DEFAULT_PARAMETERS = {
 }
 
 
-def update_score(player, score):
+def update_score(player, score, amount_questions):
     check_file_exists(LEADERBOARD_PATH)
     with open(LEADERBOARD_PATH, "r+") as file:
         content = file.read()
@@ -26,12 +26,13 @@ def update_score(player, score):
             
             file.seek(23)
             for key, value in players.items():
-                file.write(f"{key:<10}: {value:<10}\n")
+                file.write(f"{key:<10}: {value:<10}/{amount_questions}\n")
                 
         else:
-            file.write(f"{player:<10}: {score:<10}\n")
+            file.write(f"{player:<10}: {score:<10}/{amount_questions}\n")
             
 def read_scores():
+    os.system('cls')
     check_file_exists(LEADERBOARD_PATH)
     with open(LEADERBOARD_PATH, "r") as file:
         data = file.readlines()
@@ -39,8 +40,14 @@ def read_scores():
     for line in data:
         print(" ".join(line.strip()))
 
+    while True:
+        user_input = input('Type "Done" to continue: ')
+        if user_input or user_input.strip() == "":
+            break
+
 
 def settings():
+    os.system('cls')
     defaults = get_settings()
     print("\nWhich settings would you like to change?: ")
     for key, value in defaults.items():
@@ -53,9 +60,9 @@ def settings():
                 if user_input.strip() == "":
                         break
                 try:
-                    choice = int(user_input)
+                    user_input = int(user_input)
                     if not 10 <= choice <= 50:
-                        print(f"Pick a number between 10 & 50, {choice} is over/under the limit.")
+                        print(f"Pick a number between 10 & 50, {user_input} is over/under the limit.")
                     else:
                         break
                 except:
@@ -70,33 +77,34 @@ def settings():
             while True:
                 user_input = str(input(": "))
                 if user_input.strip() == "":
-                        break
+                    break
                 try:
-                    choice = int(user_input)
-                    if 1 <= choice <= len(data['trivia_categories']) + 1:
+                    user_input = int(user_input)
+                    if 1 <= user_input <= len(data['trivia_categories']) + 1:
                         break
                     else:
-                        print(f"Pick a number between 1 & {len(data['trivia_categories']) + 1}, {choice} is over/under the limit.")
+                        print(f"Pick a number between 1 & {len(data['trivia_categories']) + 1}, {user_input} is over/under the limit.")
                 except:
                     print("Please enter a number")
 
-            user_input = data['trivia_categories'][choice-1]['id']
+            user_input = data['trivia_categories'][user_input-1]['id'] if user_input.strip() != "" else value
+
         elif key == "difficulty":   
             while True:
                 print("Options are:\n1. Easy    | 2. Medium     | 3. Hard")
                 user_input = str(input(": "))
                 if user_input.strip() == "":
-                        break
+                    break
                 try:
-                    choice = int(user_input)
-                    if 1 <= choice <= 3:
+                    user_input = int(user_input)
+                    if 1 <= user_input <= 3:
                         break
                     else:
                         print(f"Pick a number between 1 & 3.")
                 except:
                     print("Please enter a number")
 
-            user_input = 'easy' if choice == 1 else 'medium' if choice == 2 else "hard"
+            user_input = 'easy' if user_input == 1 else 'medium' if user_input == 2 else "hard" if user_input == 3 else value
         else:
             while True:
                 print("Options are:\n1. True/False    | 2. Multiple Choice")
@@ -112,7 +120,8 @@ def settings():
                 except:
                     print("Please enter a number")
 
-            user_input = 'boolean' if choice == 1 else 'multiple'
+            user_input = 'boolean' if user_input == 1 else 'multiple' if user_input == 1 else value
+            
 
         defaults[key] = value if str(user_input) == "" or not str(user_input).isnumeric() else user_input
         write_to_file(defaults)
@@ -126,7 +135,7 @@ def check_file_exists(path):
 
         if "score_board" in path:
             with open(path, "w") as file:
-                file.write(f"{'Player':<10}: {'Score':<10}\n")
+                file.write(f"{'Player':<10}: {'Score':<10}\n\n")
 
         elif "settings" in path:
             write_to_file(DEFAULT_PARAMETERS)
