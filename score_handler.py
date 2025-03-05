@@ -61,7 +61,7 @@ def settings():
                         break
                 try:
                     user_input = int(user_input)
-                    if not 10 <= choice <= 50:
+                    if not 10 <= user_input <= 50:
                         print(f"Pick a number between 10 & 50, {user_input} is over/under the limit.")
                     else:
                         break
@@ -87,7 +87,7 @@ def settings():
                 except:
                     print("Please enter a number")
 
-            user_input = data['trivia_categories'][user_input-1]['id'] if user_input.strip() != "" else value
+            user_input = data['trivia_categories'][user_input-1]['id'] if user_input != "" else value
 
         elif key == "difficulty":   
             while True:
@@ -112,19 +112,19 @@ def settings():
                 if user_input.strip() == "":
                         break
                 try:
-                    choice = int(user_input)
-                    if 1 <= choice <= 2:
+                    user_input = int(user_input)
+                    if 1 <= user_input <= 2:
                         break
                     else:
                         print(f"Pick a number between 1 & 2.")
                 except:
                     print("Please enter a number")
-
-            user_input = 'boolean' if user_input == 1 else 'multiple' if user_input == 1 else value
+            
+            user_input = 'boolean' if int(user_input) == 1 else 'multiple' if int(user_input) == 2 else value
             
 
-        defaults[key] = value if str(user_input) == "" or not str(user_input).isnumeric() else user_input
-        write_to_file(defaults)
+        defaults[key] = value if str(user_input) == "" else user_input
+    write_to_file(defaults)
 
 def check_file_exists(path):
     created = False
@@ -145,8 +145,8 @@ def check_file_exists(path):
 
 def write_to_file(stuff):
     with open(SETTINGS_PATH, "w") as file:
-            for key, value in stuff.items():
-                file.write(f"{key} : {value}\n")   
+        for key, value in stuff.items():
+            file.write(f"{key} : {value}\n")   
 
 
 def get_settings() -> dict:

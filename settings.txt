@@ -1,4 +1,4 @@
 amount : 10
-category : 18
+category : 23
 difficulty : easy
-type : multiple
+type : boolean

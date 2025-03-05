@@ -21,7 +21,7 @@ def get_questions() -> dict:
         )
         for pos, item in enumerate(data)
         }
-
+    print(len(formatted_question))
     return formatted_question
 
 def display_questions(question:object, mode='cli') -> str:
@@ -70,7 +70,7 @@ def CLI_version(questions) -> None:
         else:
             print(incorrect)
 
-        # sleep(1)
+        sleep(1)
         count += 1
         os.system('cls')
 
@@ -89,7 +89,9 @@ def game():
     update_score(tag, SCORE, len(questions))
 
 def main():
+    global SCORE
     while True:
+        SCORE = 0
         os.system('cls')
         print(cli_header)
         print("Please select what you want to do:\n1. Play a Game    |   2. View Leaderboard\n3. Settings\n")
@@ -100,7 +102,7 @@ def main():
             elif int(option) == 2:
                 read_scores()
             elif int(option) == 3:
-                defaults = settings()
+                settings()
         except:
             break
     

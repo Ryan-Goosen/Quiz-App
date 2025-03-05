@@ -1,4 +1,14 @@
-Player    : Score     
-
-frank     : 6         
-1 man     : 1         /10
+Player    : Score     Player    : Score     /20/10/20/20/0
+frank     : 6         /20/10/20/20/0
+1 man     : 1         /10/20/10/20/20/0
+linethemba: 2         /10/20/10/20/20/0
+hgt       : 5         /10/20/10/20/20/0
+kyle sucks: 6         /10/20/10/20/20/0
+cam not good: 4         /10/20/10/20/20/0
+ryan cant make a game: 7         /20/10/20/20/0
+pimp      : 9         /20/20/20/0
+nigga killa: 9         /20/20/20/0
+den       : 9         /20/20/20/0
+Don       : 0         /0
+& c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/.env/Scripts/python.exe c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/simple_script.py: 0         /0
+& c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/.env/Scripts/python.exe c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/questions.py: 0         /0
