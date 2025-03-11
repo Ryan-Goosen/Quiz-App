@@ -12,3 +12,4 @@ den       : 9         /20/20/20/0
 Don       : 0         /0
 & c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/.env/Scripts/python.exe c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/simple_script.py: 0         /0
 & c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/.env/Scripts/python.exe c:/Users/Francis/Documents/100-Personal_Projects_and_Documents/120-Personal_Projects/Inprogress/Quiz-App/questions.py: 0         /0
+gwababa king: 8         /10
